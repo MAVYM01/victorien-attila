@@ -1,1100 +1,790 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Victorien Attila · Portfolio Ingénieur</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      background: #0a0b0e;
-      color: #e8eaf0;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      line-height: 1.7;
-      overflow-x: hidden;
-    }
-
-    /* Bruit de fond */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.4;
-    }
-
-    /* NAV */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.2rem 4rem;
-      background: rgba(10,11,14,0.85);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid #1f2433;
-    }
-
-    .nav-logo {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 1.1rem;
-      color: #e8c97e;
-      letter-spacing: 0.05em;
-      text-decoration: none;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: #7a8099;
-      text-decoration: none;
-      font-size: 0.85rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
-
-    .nav-links a:hover {
-      color: #e8c97e;
-    }
-
-    /* HERO */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding: 0 4rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-grid-bg {
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(#1f2433 1px, transparent 1px),
-        linear-gradient(90deg, #1f2433 1px, transparent 1px);
-      background-size: 60px 60px;
-      opacity: 0.3;
-      mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black, transparent);
-    }
-
-    .hero-glow {
-      position: absolute;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(232,201,126,0.08) 0%, transparent 70%);
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 1;
-      max-width: 860px;
-    }
-
-    .hero-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: rgba(232,201,126,0.08);
-      border: 1px solid rgba(232,201,126,0.2);
-      color: #e8c97e;
-      font-size: 0.78rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      padding: 0.4rem 1rem;
-      border-radius: 100px;
-      margin-bottom: 2rem;
-      animation: fadeUp 0.6s ease both;
-    }
-
-    .hero-tag span {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #e8c97e;
-      display: inline-block;
-    }
-
-    .hero-name {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: clamp(3rem, 6vw, 5.5rem);
-      line-height: 1.05;
-      letter-spacing: -0.02em;
-      margin-bottom: 1rem;
-      animation: fadeUp 0.6s 0.1s ease both;
-    }
-
-    .hero-name em {
-      font-style: normal;
-      color: #e8c97e;
-    }
-
-    .hero-sub {
-      font-size: 1.15rem;
-      color: #7a8099;
-      max-width: 560px;
-      margin-bottom: 2.5rem;
-      animation: fadeUp 0.6s 0.2s ease both;
-    }
-
-    .hero-links {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      animation: fadeUp 0.6s 0.3s ease both;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1.8rem;
-      border-radius: 100px;
-      font-size: 0.88rem;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 500;
-      text-decoration: none;
-      cursor: pointer;
-      transition: all 0.25s;
-      border: none;
-    }
-
-    .btn-primary {
-      background: #e8c97e;
-      color: #0a0b0e;
-    }
-
-    .btn-primary:hover {
-      background: #f0d78e;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(232,201,126,0.25);
-    }
-
-    .btn-ghost {
-      background: transparent;
-      border: 1px solid #1f2433;
-      color: #e8eaf0;
-    }
-
-    .btn-ghost:hover {
-      border-color: #e8c97e;
-      color: #e8c97e;
-    }
-
-    /* SECTIONS */
-    section {
-      padding: 6rem 4rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    .section-label {
-      font-size: 0.75rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #e8c97e;
-      margin-bottom: 0.75rem;
-      font-weight: 500;
-    }
-
-    .section-title {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: clamp(1.8rem, 3vw, 2.6rem);
-      line-height: 1.15;
-      margin-bottom: 3rem;
-      letter-spacing: -0.02em;
-    }
-
-    /* ABOUT */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: start;
-    }
-
-    .about-text p {
-      color: #7a8099;
-      font-size: 1.02rem;
-      margin-bottom: 1.2rem;
-    }
-
-    .about-text p strong {
-      color: #e8eaf0;
-      font-weight: 500;
-    }
-
-    .contact-list {
-      list-style: none;
-      margin-top: 2rem;
-    }
-
-    .contact-list li {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      padding: 0.7rem 0;
-      border-bottom: 1px solid #1f2433;
-      color: #7a8099;
-      font-size: 0.92rem;
-    }
-
-    .contact-list li .icon {
-      color: #e8c97e;
-      font-size: 1rem;
-      min-width: 20px;
-      text-align: center;
-    }
-
-    .contact-list a {
-      color: #4fc3f7;
-      text-decoration: none;
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-    }
-
-    .stat-card {
-      background: #111318;
-      border: 1px solid #1f2433;
-      border-radius: 12px;
-      padding: 1.5rem;
-      transition: border-color 0.25s;
-    }
-
-    .stat-card:hover {
-      border-color: #e8c97e;
-    }
-
-    .stat-num {
-      font-family: 'Syne', sans-serif;
-      font-size: 2rem;
-      font-weight: 800;
-      color: #e8c97e;
-      line-height: 1;
-      margin-bottom: 0.3rem;
-    }
-
-    .stat-label {
-      font-size: 0.82rem;
-      color: #7a8099;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    /* SKILLS */
-    #skills {
-      background: #111318;
-    }
-
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .skill-group {
-      background: #181c24;
-      border: 1px solid #1f2433;
-      border-radius: 12px;
-      padding: 1.8rem;
-      transition: border-color 0.25s, transform 0.25s;
-    }
-
-    .skill-group:hover {
-      border-color: #e8c97e;
-      transform: translateY(-3px);
-    }
-
-    .skill-group-title {
-      font-family: 'Syne', sans-serif;
-      font-weight: 600;
-      font-size: 0.9rem;
-      letter-spacing: 0.06em;
-      color: #e8c97e;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-      padding-bottom: 0.6rem;
-      border-bottom: 1px solid #1f2433;
-    }
-
-    .skill-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .skill-tag {
-      background: rgba(232,201,126,0.06);
-      border: 1px solid rgba(232,201,126,0.15);
-      color: #e8eaf0;
-      font-size: 0.8rem;
-      padding: 0.3rem 0.8rem;
-      border-radius: 100px;
-    }
-
-    /* LANGUE BARS */
-    .lang-item {
-      margin-bottom: 1.1rem;
-    }
-
-    .lang-header {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 0.4rem;
-      font-size: 0.88rem;
-    }
-
-    .lang-level {
-      color: #e8c97e;
-      font-size: 0.78rem;
-    }
-
-    .lang-bar {
-      height: 4px;
-      background: #1f2433;
-      border-radius: 2px;
-      overflow: hidden;
-    }
-
-    .lang-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #e8c97e, #4fc3f7);
-      border-radius: 2px;
-      transition: width 1s ease;
-    }
-
-    /* TIMELINE */
-    .timeline {
-      position: relative;
-      padding-left: 2rem;
-    }
-
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 1px;
-      background: linear-gradient(to bottom, #e8c97e, #4fc3f7, transparent);
-    }
-
-    .timeline-item {
-      position: relative;
-      margin-bottom: 2.5rem;
-      padding-bottom: 2.5rem;
-      border-bottom: 1px solid #1f2433;
-    }
-
-    .timeline-item:last-child {
-      border-bottom: none;
-    }
-
-    .timeline-dot {
-      position: absolute;
-      left: -2.4rem;
-      top: 0.3rem;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: #e8c97e;
-      box-shadow: 0 0 0 3px rgba(232,201,126,0.15);
-    }
-
-    .timeline-date {
-      font-size: 0.78rem;
-      color: #e8c97e;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 0.4rem;
-    }
-
-    .timeline-title {
-      font-family: 'Syne', sans-serif;
-      font-weight: 600;
-      font-size: 1.05rem;
-      margin-bottom: 0.2rem;
-    }
-
-    .timeline-org {
-      font-size: 0.88rem;
-      color: #4fc3f7;
-      margin-bottom: 0.7rem;
-    }
-
-    .timeline-desc {
-      color: #7a8099;
-      font-size: 0.9rem;
-    }
-
-    .timeline-desc ul {
-      padding-left: 1.2rem;
-      margin-top: 0.4rem;
-    }
-
-    .timeline-desc li {
-      margin-bottom: 0.25rem;
-    }
-
-    /* PROJECTS */
-    #projets {
-      background: #111318;
-    }
-
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .project-card {
-      background: #181c24;
-      border: 1px solid #1f2433;
-      border-radius: 12px;
-      padding: 2rem;
-      transition: border-color 0.25s, transform 0.25s;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .project-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, #e8c97e, #4fc3f7);
-      transform: scaleX(0);
-      transition: transform 0.3s;
-      transform-origin: left;
-    }
-
-    .project-card:hover {
-      border-color: rgba(232,201,126,0.3);
-      transform: translateY(-4px);
-    }
-
-    .project-card:hover::before {
-      transform: scaleX(1);
-    }
-
-    .project-date {
-      font-size: 0.75rem;
-      color: #7a8099;
-      margin-bottom: 0.5rem;
-      letter-spacing: 0.08em;
-    }
-
-    .project-title {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 1.1rem;
-      margin-bottom: 0.5rem;
-      line-height: 1.3;
-    }
-
-    .project-subtitle {
-      font-size: 0.82rem;
-      color: #e8c97e;
-      margin-bottom: 0.9rem;
-    }
-
-    .project-desc {
-      color: #7a8099;
-      font-size: 0.88rem;
-    }
-
-    .project-desc ul {
-      padding-left: 1.1rem;
-    }
-
-    .project-desc li {
-      margin-bottom: 0.3rem;
-    }
-
-    /* LEADERSHIP */
-    .leadership-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-    }
-
-    .leadership-card {
-      background: #181c24;
-      border: 1px solid #1f2433;
-      border-radius: 12px;
-      padding: 1.8rem;
-      transition: border-color 0.25s;
-    }
-
-    .leadership-card:hover {
-      border-color: #4fc3f7;
-    }
-
-    .leadership-role {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 1rem;
-      margin-bottom: 0.3rem;
-    }
-
-    .leadership-org {
-      font-size: 0.85rem;
-      color: #4fc3f7;
-      margin-bottom: 0.3rem;
-    }
-
-    .leadership-period {
-      font-size: 0.78rem;
-      color: #7a8099;
-      margin-bottom: 0.9rem;
-    }
-
-    .badge-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-    }
-
-    .badge {
-      background: rgba(79,195,247,0.08);
-      border: 1px solid rgba(79,195,247,0.2);
-      color: #4fc3f7;
-      font-size: 0.75rem;
-      padding: 0.25rem 0.7rem;
-      border-radius: 100px;
-    }
-
-    /* INTERESTS */
-    #interets {
-      background: #111318;
-    }
-
-    .interest-row {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .interest-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      background: #181c24;
-      border: 1px solid #1f2433;
-      border-radius: 12px;
-      padding: 1.5rem 2rem;
-      font-size: 0.9rem;
-      color: #7a8099;
-      transition: all 0.25s;
-      min-width: 100px;
-    }
-
-    .interest-item .emoji {
-      font-size: 2rem;
-    }
-
-    .interest-item:hover {
-      border-color: #e8c97e;
-      color: #e8c97e;
-    }
-
-    /* FOOTER */
-    footer {
-      border-top: 1px solid #1f2433;
-      padding: 3rem 4rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .footer-name {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 1.1rem;
-      color: #e8c97e;
-    }
-
-    footer p {
-      color: #7a8099;
-      font-size: 0.82rem;
-    }
-
-    /* ANIMATIONS */
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(24px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: none;
-    }
-
-    /* MOBILE */
-    @media (max-width: 768px) {
-      nav {
-        padding: 1rem 1.5rem;
-      }
-      .nav-links {
-        display: none;
-      }
-      section {
-        padding: 4rem 1.5rem;
-      }
-      .hero {
-        padding: 0 1.5rem;
-      }
-      .about-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
-      .stats-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-      .leadership-grid {
-        grid-template-columns: 1fr;
-      }
-      footer {
-        padding: 2rem 1.5rem;
-        flex-direction: column;
-        align-items: flex-start;
-      }
-    }
-  </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Victorien Attila — Étudiant Ingénieur Grenoble INP</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #0a0b0e;
+    --bg2: #111318;
+    --bg3: #181c24;
+    --accent: #e8c97e;
+    --accent2: #4fc3f7;
+    --text: #e8eaf0;
+    --muted: #7a8099;
+    --border: #1f2433;
+    --radius: 12px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(10,11,14,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 0 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.3;
+    mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black, transparent);
+  }
+  .hero-glow {
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(232,201,126,0.08) 0%, transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 860px; }
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(232,201,126,0.08);
+    border: 1px solid rgba(232,201,126,0.2);
+    color: var(--accent);
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem;
+    border-radius: 100px;
+    margin-bottom: 2rem;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-tag span { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); display: inline-block; }
+  .hero-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  .hero-name em { font-style: normal; color: var(--accent); }
+  .hero-sub {
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 580px;
+    margin-bottom: 2.5rem;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+  .hero-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.8rem;
+    border-radius: 100px;
+    font-size: 0.88rem;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.25s;
+    border: none;
+  }
+  .btn-primary { background: var(--accent); color: #0a0b0e; }
+  .btn-primary:hover { background: #f0d78e; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(232,201,126,0.25); }
+  .btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--text); }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* SECTIONS */
+  section { padding: 6rem 4rem; position: relative; z-index: 1; }
+  .section-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    line-height: 1.15;
+    margin-bottom: 3rem;
+    letter-spacing: -0.02em;
+  }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  .about-text p { color: var(--muted); font-size: 1.02rem; margin-bottom: 1.2rem; }
+  .about-text p strong { color: var(--text); font-weight: 500; }
+  .contact-list { list-style: none; margin-top: 2rem; }
+  .contact-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+  .contact-list li .icon { color: var(--accent); font-size: 1rem; min-width: 20px; text-align: center; }
+  .contact-list a { color: var(--accent2); text-decoration: none; }
+  .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .stat-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    transition: border-color 0.25s;
+  }
+  .stat-card:hover { border-color: var(--accent); }
+  .stat-num { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: var(--accent); line-height: 1; margin-bottom: 0.3rem; }
+  .stat-label { font-size: 0.82rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+
+  /* SKILLS */
+  #competences { background: var(--bg2); }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+  .skill-group {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.8rem;
+    transition: border-color 0.25s, transform 0.25s;
+  }
+  .skill-group:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .skill-group-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .skill-tag {
+    background: rgba(232,201,126,0.06);
+    border: 1px solid rgba(232,201,126,0.15);
+    color: var(--text);
+    font-size: 0.8rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 100px;
+  }
+
+  /* LANG BARS */
+  .lang-item { margin-bottom: 1.1rem; }
+  .lang-header { display: flex; justify-content: space-between; margin-bottom: 0.4rem; font-size: 0.88rem; }
+  .lang-level { color: var(--accent); font-size: 0.78rem; }
+  .lang-bar { height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+  .lang-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 2px; transition: width 1.2s ease; }
+
+  /* TIMELINE */
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--accent), var(--accent2), transparent);
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 2.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .timeline-item:last-child { border-bottom: none; margin-bottom: 0; }
+  .timeline-dot {
+    position: absolute;
+    left: -2.4rem;
+    top: 0.3rem;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px rgba(232,201,126,0.15);
+  }
+  .timeline-date { font-size: 0.78rem; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.4rem; }
+  .timeline-title { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 1.05rem; margin-bottom: 0.2rem; }
+  .timeline-org { font-size: 0.88rem; color: var(--accent2); margin-bottom: 0.7rem; }
+  .timeline-desc { color: var(--muted); font-size: 0.9rem; }
+  .timeline-desc ul { padding-left: 1.2rem; margin-top: 0.4rem; }
+  .timeline-desc li { margin-bottom: 0.25rem; }
+  .badge-inline {
+    display: inline-block;
+    background: rgba(232,201,126,0.1);
+    border: 1px solid rgba(232,201,126,0.25);
+    color: var(--accent);
+    font-size: 0.72rem;
+    padding: 0.15rem 0.65rem;
+    border-radius: 100px;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+  }
+
+  /* PROJECTS */
+  #projets { background: var(--bg2); }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+  .project-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem;
+    transition: border-color 0.25s, transform 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    transform: scaleX(0);
+    transition: transform 0.3s;
+    transform-origin: left;
+  }
+  .project-card:hover { border-color: rgba(232,201,126,0.3); transform: translateY(-4px); }
+  .project-card:hover::before { transform: scaleX(1); }
+  .project-date { font-size: 0.75rem; color: var(--muted); margin-bottom: 0.5rem; letter-spacing: 0.08em; }
+  .project-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem; line-height: 1.3; }
+  .project-subtitle { font-size: 0.82rem; color: var(--accent); margin-bottom: 0.9rem; }
+  .project-desc { color: var(--muted); font-size: 0.88rem; }
+  .project-desc ul { padding-left: 1.1rem; }
+  .project-desc li { margin-bottom: 0.3rem; }
+
+  /* LEADERSHIP */
+  .leadership-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .leadership-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.8rem;
+    transition: border-color 0.25s;
+  }
+  .leadership-card:hover { border-color: var(--accent2); }
+  .leadership-role { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 0.3rem; }
+  .leadership-org { font-size: 0.85rem; color: var(--accent2); margin-bottom: 0.3rem; }
+  .leadership-period { font-size: 0.78rem; color: var(--muted); margin-bottom: 0.9rem; }
+  .badge-list { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .badge {
+    background: rgba(79,195,247,0.08);
+    border: 1px solid rgba(79,195,247,0.2);
+    color: var(--accent2);
+    font-size: 0.75rem;
+    padding: 0.25rem 0.7rem;
+    border-radius: 100px;
+  }
+
+  /* INTERESTS */
+  .interest-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .interest-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem 2rem;
+    font-size: 0.9rem;
+    color: var(--muted);
+    transition: all 0.25s;
+    min-width: 110px;
+  }
+  .interest-item .emoji { font-size: 2rem; }
+  .interest-item:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 3rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .footer-name { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; color: var(--accent); }
+  footer p { color: var(--muted); font-size: 0.82rem; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .hero { padding: 0 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .leadership-grid { grid-template-columns: 1fr; }
+    footer { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
+  }
+</style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <a href="#" class="nav-logo">V·ATTILA</a>
-    <ul class="nav-links">
-      <li><a href="#about">À propos</a></li>
-      <li><a href="#skills">Compétences</a></li>
-      <li><a href="#formations">Formation</a></li>
-      <li><a href="#experiences">Expériences</a></li>
-      <li><a href="#projets">Projets</a></li>
-      <li><a href="#leadership">Leadership</a></li>
-    </ul>
-  </nav>
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">V·ATTILA</a>
+  <ul class="nav-links">
+    <li><a href="#about">À propos</a></li>
+    <li><a href="#competences">Compétences</a></li>
+    <li><a href="#formations">Formation</a></li>
+    <li><a href="#experiences">Expériences</a></li>
+    <li><a href="#projets">Projets</a></li>
+    <li><a href="#leadership">Leadership</a></li>
+  </ul>
+</nav>
 
-  <!-- HERO -->
-  <section class="hero" id="home">
-    <div class="hero-grid-bg"></div>
-    <div class="hero-glow"></div>
-    <div class="hero-content">
-      <div class="hero-tag">
-        <span></span>
-        Disponible pour un stage — Supply Chain & Amélioration Continue
-      </div>
-      <h1 class="hero-name">
-        Victorien<br/>
-        <em>Yawo Attila</em>
-      </h1>
-      <p class="hero-sub">
-        Étudiant Major de Promo en Logistique & Transport à l'EPL, spécialisé en
-        Supply Chain, Génie Industriel et Amélioration Continue avec Data.
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-tag">
+      <span></span>
+      Étudiant Ingénieur à Grenoble INP — Génie Industriel
+    </div>
+    <h1 class="hero-name">
+      Victorien<br/>
+      <em>Yawo Attila</em>
+    </h1>
+    <p class="hero-sub">
+      Diplômé Major de Promo en Logistique &amp; Transport (EPL/UTT), désormais
+      Étudiant Ingénieur à <strong style="color:var(--text)">Grenoble INP Génie Industriel</strong>.
+      Spécialisé en Supply Chain, Optimisation et Amélioration Continue avec Data.
+    </p>
+    <div class="hero-links">
+      <a href="mailto:victorienattila@gmail.com" class="btn btn-primary">✉ Me contacter</a>
+      <a href="https://www.linkedin.com/in/victorienattila" target="_blank" class="btn btn-ghost">LinkedIn →</a>
+      <a href="#projets" class="btn btn-ghost">Voir mes projets ↓</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p class="section-label">À propos</p>
+      <h2 class="section-title">Rigueur, Data<br/>&amp; Leadership</h2>
+      <p>
+        Diplômé <strong>Major de Promotion</strong> (Mention Bien) en Licence Logistique &amp; Transport
+        à l'<strong>École Polytechnique de Lomé</strong>, enrichi par une mobilité académique à
+        l'<strong>UTT</strong> en Génie Industriel (Troyes, France).
       </p>
-      <div class="hero-links">
-        <a href="mailto:victorienattila@gmail.com" class="btn btn-primary">
-          ✉ Me contacter
-        </a>
-        <a href="https://www.linkedin.com/in/victorienattila" target="_blank" class="btn btn-ghost">
-          LinkedIn →
-        </a>
-        <a href="#projets" class="btn btn-ghost">
-          Voir mes projets ↓
-        </a>
+      <p>
+        Désormais <strong>Étudiant Ingénieur à Grenoble INP</strong> en Génie Industriel,
+        je me spécialise en Supply Chain, Amélioration Continue et Optimisation avec Data.
+        Fort d'expériences terrain variées et d'un leadership affirmé depuis le lycée.
+      </p>
+      <ul class="contact-list">
+        <li><span class="icon">📍</span> Grenoble, France</li>
+        <li><span class="icon">📞</span> +33 7 45 48 63 70</li>
+        <li><span class="icon">✉</span> <a href="mailto:victorienattila@gmail.com">victorienattila@gmail.com</a></li>
+        <li><span class="icon">🔗</span> <a href="https://www.linkedin.com/in/victorienattila" target="_blank">linkedin.com/in/victorienattila</a></li>
+        <li><span class="icon">🚗</span> Permis de conduire (B)</li>
+      </ul>
+    </div>
+    <div class="reveal" style="transition-delay:0.15s">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-num">Major</div>
+          <div class="stat-label">de Promotion EPL</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">INP</div>
+          <div class="stat-label">Grenoble — 2026</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">5+</div>
+          <div class="stat-label">Langues parlées</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">3+</div>
+          <div class="stat-label">Projets techniques</div>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="about-grid">
-      <div class="about-text reveal">
-        <p class="section-label">À propos</p>
-        <h2 class="section-title">Rigueur, Data<br/>& Leadership</h2>
-        <p>
-          Étudiant en fin de parcours Licence à <strong>l'École Polytechnique de Lomé</strong>,
-          Major de promotion, enrichi par une mobilité académique à
-          <strong>l'Université de Technologie de Troyes (UTT)</strong> en Génie Industriel.
-        </p>
-        <p>
-          Je me spécialise en <strong>Supply Chain</strong> avec une dimension poussée en
-          Amélioration Continue et Data. Rigoureux, doté d'un fort sens du leadership,
-          je vise à apporter une expertise technique concrète à une structure ambitieuse.
-        </p>
-        <ul class="contact-list">
-          <li><span class="icon">📍</span> Lomé, Togo</li>
-          <li><span class="icon">📞</span> +228 93 67 89 98 / +228 99 82 96 16</li>
-          <li><span class="icon">✉</span> <a href="mailto:victorienattila@gmail.com">victorienattila@gmail.com</a></li>
-          <li><span class="icon">🔗</span> <a href="https://www.linkedin.com/in/victorienattila" target="_blank">linkedin.com/in/victorienattila</a></li>
-          <li><span class="icon">🚗</span> Permis de conduire (B)</li>
+<!-- COMPETENCES -->
+<section id="competences">
+  <p class="section-label reveal">Compétences</p>
+  <h2 class="section-title reveal">Mon arsenal<br/>technique</h2>
+  <div class="skills-grid">
+    <div class="skill-group reveal">
+      <div class="skill-group-title">⚙️ Génie Industriel</div>
+      <div class="skill-tags">
+        <span class="skill-tag">DDMRP</span>
+        <span class="skill-tag">Lean Management</span>
+        <span class="skill-tag">Six Sigma</span>
+        <span class="skill-tag">Kanban</span>
+        <span class="skill-tag">MRP</span>
+        <span class="skill-tag">Théorie des Contraintes (ToC)</span>
+        <span class="skill-tag">Gestion de projet</span>
+      </div>
+    </div>
+    <div class="skill-group reveal" style="transition-delay:0.1s">
+      <div class="skill-group-title">📊 Optimisation &amp; Outils</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">Deep Q-Learning</span>
+        <span class="skill-tag">CPLEX</span>
+        <span class="skill-tag">Gurobi</span>
+        <span class="skill-tag">MySQL</span>
+        <span class="skill-tag">Power BI</span>
+        <span class="skill-tag">Solveur Excel</span>
+      </div>
+    </div>
+    <div class="skill-group reveal" style="transition-delay:0.2s">
+      <div class="skill-group-title">🖊️ Édition &amp; Bureautique</div>
+      <div class="skill-tags">
+        <span class="skill-tag">LaTeX / Overleaf</span>
+        <span class="skill-tag">LyX</span>
+        <span class="skill-tag">Word</span>
+        <span class="skill-tag">PowerPoint</span>
+        <span class="skill-tag">Canva</span>
+      </div>
+    </div>
+    <div class="skill-group reveal" style="transition-delay:0.3s">
+      <div class="skill-group-title">🌐 Langues</div>
+      <div style="margin-top:0.5rem">
+        <div class="lang-item">
+          <div class="lang-header"><span>Français</span><span class="lang-level">C1</span></div>
+          <div class="lang-bar"><div class="lang-fill" data-width="90%"></div></div>
+        </div>
+        <div class="lang-item">
+          <div class="lang-header"><span>Anglais</span><span class="lang-level">B1</span></div>
+          <div class="lang-bar"><div class="lang-fill" data-width="55%"></div></div>
+        </div>
+        <div class="lang-item">
+          <div class="lang-header"><span>Guin (Togo)</span><span class="lang-level">B2</span></div>
+          <div class="lang-bar"><div class="lang-fill" data-width="70%"></div></div>
+        </div>
+        <div class="lang-item">
+          <div class="lang-header"><span>Ewé / Mina</span><span class="lang-level">Maternelle</span></div>
+          <div class="lang-bar"><div class="lang-fill" data-width="100%"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="skill-group reveal" style="transition-delay:0.35s">
+      <div class="skill-group-title">🤝 Soft Skills</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Leadership</span>
+        <span class="skill-tag">Conduite d'équipe</span>
+        <span class="skill-tag">Capacité d'adaptation</span>
+        <span class="skill-tag">Prise de décision</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMATIONS -->
+<section id="formations">
+  <p class="section-label reveal">Formation</p>
+  <h2 class="section-title reveal">Parcours<br/>académique</h2>
+  <div class="timeline reveal">
+
+    <div class="timeline-item">
+      <div class="timeline-dot" style="background:var(--accent); box-shadow: 0 0 0 4px rgba(232,201,126,0.2), 0 0 14px rgba(232,201,126,0.3);"></div>
+      <div class="timeline-date">Août 2026 – Juin 2029 · En cours</div>
+      <div class="timeline-title">
+        Cycle Ingénieur — Génie Industriel
+        <span class="badge-inline">EN COURS</span>
+      </div>
+      <div class="timeline-org">Grenoble INP Génie Industriel — Grenoble, France</div>
+      <div class="timeline-desc">Formation d'ingénieur spécialisée en Génie Industriel : optimisation, systèmes de production, Supply Chain avancée, management de l'innovation.</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">Août 2025 – Juin 2026</div>
+      <div class="timeline-title">Échange académique — Génie Industriel</div>
+      <div class="timeline-org">Université de Technologie de Troyes (UTT) — Troyes, France</div>
+      <div class="timeline-desc">Spécialisation en optimisation combinatoire, DDMRP, planification industrielle et méthodes quantitatives appliquées à la Supply Chain.</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">Octobre 2023 – Juillet 2026</div>
+      <div class="timeline-title">
+        Licence Fondamentale — Logistique &amp; Transport
+        <span class="badge-inline" style="background:rgba(232,201,126,0.15); border-color:rgba(232,201,126,0.4)">Major de Promo · Mention Bien</span>
+      </div>
+      <div class="timeline-org">École Polytechnique de Lomé (EPL/UL) — Lomé, Togo</div>
+      <div class="timeline-desc">Diplômé Major de Promotion avec Mention Bien. Supply Chain, gestion de stocks, transport et planification logistique.</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot" style="background:var(--accent2)"></div>
+      <div class="timeline-date">Septembre 2022 – Juillet 2023</div>
+      <div class="timeline-title">Baccalauréat C — Mathématiques &amp; Physiques</div>
+      <div class="timeline-org">Lycée de Davié — Tsévié, Togo</div>
+      <div class="timeline-desc">Mention Assez Bien.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCES -->
+<section id="experiences" style="background:var(--bg2)">
+  <p class="section-label reveal">Expériences</p>
+  <h2 class="section-title reveal">Terrain<br/>&amp; pratique</h2>
+  <div class="timeline reveal">
+
+    <div class="timeline-item">
+      <div class="timeline-dot" style="background:var(--accent); box-shadow: 0 0 0 4px rgba(232,201,126,0.2);"></div>
+      <div class="timeline-date">Mai 2026 – Juillet 2026</div>
+      <div class="timeline-title">Stage Académique — Atelier Mécanique de l'EPL</div>
+      <div class="timeline-org">École Polytechnique de Lomé — Lomé, Togo</div>
+      <div class="timeline-desc">
+        Optimisation de la gestion du parc machine et développement d'un outil de suivi des consommables.
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">Août 2023 – Aujourd'hui</div>
+      <div class="timeline-title">Enseignant Répétiteur</div>
+      <div class="timeline-org">Cours particuliers — Lomé, Togo</div>
+      <div class="timeline-desc">Accompagnement d'élèves de la 6ème à la 2nde en Mathématiques et Physique.</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">Juillet 2023 – Octobre 2023</div>
+      <div class="timeline-title">Stage Ouvrier</div>
+      <div class="timeline-org">ITRA-TOGO — Tsévié, Togo</div>
+      <div class="timeline-desc">
+        <ul>
+          <li>Travaux champêtres et suivi terrain</li>
+          <li>Gestion de stock et inventaire</li>
+          <li>Coordination des équipes ouvrières</li>
         </ul>
       </div>
-      <div class="reveal" style="transition-delay:0.15s">
-        <div class="stats-grid">
-          <div class="stat-card">
-            <div class="stat-num">Major</div>
-            <div class="stat-label">de Promotion EPL</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-num">UTT</div>
-            <div class="stat-label">Mobilité France</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-num">5+</div>
-            <div class="stat-label">Langues parlées</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-num">3+</div>
-            <div class="stat-label">Projets techniques</div>
-          </div>
-        </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot" style="background:var(--accent2)"></div>
+      <div class="timeline-date">2024 – 2025</div>
+      <div class="timeline-title">Service Livreur Autonome</div>
+      <div class="timeline-org">Contrats PME — Lomé, Togo</div>
+      <div class="timeline-desc">Livraison de marchandises, gestion des tournées, coordination avec des PME locales.</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot" style="background:var(--accent2)"></div>
+      <div class="timeline-date">2023 – 2025</div>
+      <div class="timeline-title">Job de Vacances — Serveur</div>
+      <div class="timeline-org">Restaurant Félicité — Lomé, Togo</div>
+      <div class="timeline-desc">Service en salle, relation client, gestion des commandes.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJETS -->
+<section id="projets">
+  <p class="section-label reveal">Projets</p>
+  <h2 class="section-title reveal">Réalisations<br/>techniques</h2>
+  <div class="projects-grid">
+
+    <div class="project-card reveal">
+      <div class="project-date">Septembre 2025 – Janvier 2026 · UTT</div>
+      <div class="project-title">Optimisation de Tournées &amp; Logistique Tactique</div>
+      <div class="project-subtitle">Deep Q-Learning · MRP · DDMRP · ToC</div>
+      <div class="project-desc">
+        <ul>
+          <li>Conception d'un modèle <strong>Deep Q-Learning</strong> pour les livraisons sous contraintes de fenêtres temporelles.</li>
+          <li>Analyse de données historiques et prévisions de fiabilité sur horizon tactique.</li>
+          <li>Résolution de problèmes MRP et production dynamique avec DDMRP et Théorie des Contraintes.</li>
+        </ul>
       </div>
     </div>
-  </section>
 
-  <!-- COMPETENCES -->
-  <section id="skills">
-    <p class="section-label reveal">Compétences</p>
-    <h2 class="section-title reveal">Mon arsenal<br/>technique</h2>
-    <div class="skills-grid">
-      <div class="skill-group reveal">
-        <div class="skill-group-title">⚙️ Génie Industriel</div>
-        <div class="skill-tags">
-          <span class="skill-tag">DDMRP</span>
-          <span class="skill-tag">Lean Management</span>
-          <span class="skill-tag">Six Sigma</span>
-          <span class="skill-tag">Kanban</span>
-          <span class="skill-tag">MRP</span>
-          <span class="skill-tag">Théorie des Contraintes (ToC)</span>
-          <span class="skill-tag">Gestion de projet</span>
-        </div>
-      </div>
-      <div class="skill-group reveal" style="transition-delay:0.1s">
-        <div class="skill-group-title">📊 Optimisation & Outils</div>
-        <div class="skill-tags">
-          <span class="skill-tag">Python</span>
-          <span class="skill-tag">Deep Q-Learning</span>
-          <span class="skill-tag">CPLEX</span>
-          <span class="skill-tag">Gurobi</span>
-          <span class="skill-tag">MySQL</span>
-          <span class="skill-tag">Power BI</span>
-          <span class="skill-tag">Solveur Excel</span>
-        </div>
-      </div>
-      <div class="skill-group reveal" style="transition-delay:0.2s">
-        <div class="skill-group-title">🖊️ Édition & Bureautique</div>
-        <div class="skill-tags">
-          <span class="skill-tag">LaTeX / Overleaf</span>
-          <span class="skill-tag">LyX</span>
-          <span class="skill-tag">Word</span>
-          <span class="skill-tag">PowerPoint</span>
-          <span class="skill-tag">Canva</span>
-        </div>
-      </div>
-      <div class="skill-group reveal" style="transition-delay:0.3s">
-        <div class="skill-group-title">🌐 Langues</div>
-        <div style="margin-top:0.5rem">
-          <div class="lang-item">
-            <div class="lang-header"><span>Français</span><span class="lang-level">C1</span></div>
-            <div class="lang-bar"><div class="lang-fill" style="width:90%"></div></div>
-          </div>
-          <div class="lang-item">
-            <div class="lang-header"><span>Anglais</span><span class="lang-level">B1</span></div>
-            <div class="lang-bar"><div class="lang-fill" style="width:55%"></div></div>
-          </div>
-          <div class="lang-item">
-            <div class="lang-header"><span>Guin (Togo)</span><span class="lang-level">B2</span></div>
-            <div class="lang-bar"><div class="lang-fill" style="width:70%"></div></div>
-          </div>
-          <div class="lang-item">
-            <div class="lang-header"><span>Ewé / Mina</span><span class="lang-level">Maternelle</span></div>
-            <div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div>
-          </div>
-        </div>
+    <div class="project-card reveal" style="transition-delay:0.1s">
+      <div class="project-date">Septembre 2025 – Janvier 2026 · UTT</div>
+      <div class="project-title">Gestion des Stocks Sensibles — Secteur Pharmaceutique</div>
+      <div class="project-subtitle">Optimisation des flux · Contraintes de sécurité</div>
+      <div class="project-desc">
+        <ul>
+          <li>Étude de stratégies d'écoulement de médicaments pour minimiser les pertes à la péremption.</li>
+          <li>Optimisation des flux sous contraintes de sécurité et demande variable.</li>
+        </ul>
       </div>
     </div>
-  </section>
 
-  <!-- FORMATIONS -->
-  <section id="formations" style="background:#111318">
-    <p class="section-label reveal">Formation</p>
-    <h2 class="section-title reveal">Parcours<br/>académique</h2>
-    <div class="timeline reveal">
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-date">Août 2025 – Janvier 2026</div>
-        <div class="timeline-title">Échange académique — Génie Industriel</div>
-        <div class="timeline-org">Université de Technologie de Troyes (UTT) — Troyes, France</div>
-        <div class="timeline-desc">Spécialisation en optimisation, DDMRP, planification industrielle et méthodes quantitatives.</div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-date">Octobre 2023 – En cours</div>
-        <div class="timeline-title">Licence Fondamentale — Logistique & Transport</div>
-        <div class="timeline-org">École Polytechnique de Lomé (EPL/UL) — Lomé, Togo</div>
-        <div class="timeline-desc">
-          <strong style="color:#e8c97e">Major de promotion — Mention Bien.</strong><br/>
-          Supply Chain, gestion de stocks, transport, planification logistique.
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-date">Septembre 2022 – Juillet 2023</div>
-        <div class="timeline-title">Baccalauréat C — Mathématiques & Physiques</div>
-        <div class="timeline-org">Lycée de Davié — Tsévié, Togo</div>
-        <div class="timeline-desc">Mention Assez Bien.</div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot" style="background:#4fc3f7"></div>
-        <div class="timeline-date">2019 – 2020</div>
-        <div class="timeline-title">BEPC</div>
-        <div class="timeline-org">Lycée de Davié — Tsévié, Togo</div>
-        <div class="timeline-desc">Mention Très Bien.</div>
+    <div class="project-card reveal" style="transition-delay:0.2s">
+      <div class="project-date">Avril 2025 – Août 2025 · EPL</div>
+      <div class="project-title">Application Mobile TECHNOVA — Cahier de texte numérique</div>
+      <div class="project-subtitle">MySQL · Modélisation BDD · Administration</div>
+      <div class="project-desc">
+        <ul>
+          <li>Conception et modélisation de la base de données de l'application.</li>
+          <li>Administration et optimisation des requêtes MySQL.</li>
+          <li>Co-fondateur du projet au sein de la startup étudiante TECHNOVA.</li>
+        </ul>
       </div>
     </div>
-  </section>
 
-  <!-- EXPERIENCES -->
-  <section id="experiences">
-    <p class="section-label reveal">Expériences</p>
-    <h2 class="section-title reveal">Terrain<br/>& pratique</h2>
-    <div class="timeline reveal">
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-date">Février 2026 – Aujourd'hui</div>
-        <div class="timeline-title">Service Livreur Autonome</div>
-        <div class="timeline-org">Contrats PME — Lomé, Togo</div>
-        <div class="timeline-desc">Livraison de marchandises, coordination avec des PME locales, gestion des tournées.</div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-date">Août 2023 – Aujourd'hui</div>
-        <div class="timeline-title">Enseignant Répétiteur</div>
-        <div class="timeline-org">Cours particuliers — Lomé, Togo</div>
-        <div class="timeline-desc">
-          Accompagnement d'élèves de la 6ème à la 2nde en Mathématiques et Physique.
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot" style="background:#4fc3f7"></div>
-        <div class="timeline-date">Juillet 2023 – Octobre 2023</div>
-        <div class="timeline-title">Stage Ouvrier</div>
-        <div class="timeline-org">ITRA-TOGO — Tsévié, Togo</div>
-        <div class="timeline-desc">
-          <ul>
-            <li>Travaux champêtres et suivi terrain</li>
-            <li>Gestion de stock et inventaire</li>
-            <li>Coordination des équipes ouvrières</li>
-          </ul>
-        </div>
-      </div>
-      <!-- Nouvelle expérience : Stage Académique Atelier Mécanique EPL -->
-      <div class="timeline-item">
-        <div class="timeline-dot" style="background:#e8c97e"></div>
-        <div class="timeline-date">Mai 2026 – Juillet 2026</div>
-        <div class="timeline-title">Stage Académique — Optimisation parc machine</div>
-        <div class="timeline-org">Atelier Mécanique de l'EPL — Lomé, Togo</div>
-        <div class="timeline-desc">
-          <ul>
-            <li>Optimisation de la gestion du parc machine</li>
-            <li>Développement d'un outil de suivi des consommables</li>
-          </ul>
-        </div>
+  </div>
+</section>
+
+<!-- LEADERSHIP -->
+<section id="leadership" style="background:var(--bg2)">
+  <p class="section-label reveal">Leadership</p>
+  <h2 class="section-title reveal">Engagement<br/>&amp; responsabilités</h2>
+  <div class="leadership-grid">
+    <div class="leadership-card reveal">
+      <div class="leadership-role">Délégué Général de Promo</div>
+      <div class="leadership-org">École Polytechnique de Lomé (EPL/UL)</div>
+      <div class="leadership-period">Octobre 2023 – Avril 2026</div>
+      <div class="badge-list">
+        <span class="badge">Représentation &amp; Médiation</span>
+        <span class="badge">Leadership Académique</span>
+        <span class="badge">Engagement Associatif</span>
       </div>
     </div>
-  </section>
-
-  <!-- PROJETS -->
-  <section id="projets">
-    <p class="section-label reveal">Projets</p>
-    <h2 class="section-title reveal">Réalisations<br/>techniques</h2>
-    <div class="projects-grid">
-
-      <div class="project-card reveal">
-        <div class="project-date">Septembre 2025 – Janvier 2026 · UTT</div>
-        <div class="project-title">Optimisation de Tournées & Logistique Tactique</div>
-        <div class="project-subtitle">Deep Q-Learning · MRP · DDMRP · ToC</div>
-        <div class="project-desc">
-          <ul>
-            <li>Conception d'un modèle <strong>Deep Q-Learning</strong> pour garantir les livraisons sous contraintes de fenêtres temporelles.</li>
-            <li>Analyse des données historiques et prévisions de fiabilité sur horizon tactique.</li>
-            <li>Résolution de problèmes MRP et production dynamique.</li>
-            <li>Mise en œuvre DDMRP et Théorie des Contraintes pour fluidifier les cycles de fabrication.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="project-card reveal" style="transition-delay:0.1s">
-        <div class="project-date">Septembre 2025 – Janvier 2026 · UTT</div>
-        <div class="project-title">Gestion des Stocks Sensibles — Secteur Pharmaceutique</div>
-        <div class="project-subtitle">Gestion de stock · Optimisation · Sécurité</div>
-        <div class="project-desc">
-          <ul>
-            <li>Étude de stratégies d'écoulement de médicaments pour minimiser les pertes liées à la péremption.</li>
-            <li>Optimisation des flux sous contraintes de sécurité et demande variable.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="project-card reveal" style="transition-delay:0.2s">
-        <div class="project-date">Avril 2025 – Août 2025 · EPL</div>
-        <div class="project-title">Application Mobile TECHNOVA — Cahier de texte numérique</div>
-        <div class="project-subtitle">MySQL · Modélisation BDD · Administration</div>
-        <div class="project-desc">
-          <ul>
-            <li>Conception et modélisation de la base de données.</li>
-            <li>Gestion et administration de la BDD de l'application.</li>
-            <li>Optimisation des requêtes et des performances.</li>
-          </ul>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- LEADERSHIP -->
-  <section id="leadership" style="background:#111318">
-    <p class="section-label reveal">Leadership</p>
-    <h2 class="section-title reveal">Engagement<br/>& responsabilités</h2>
-    <div class="leadership-grid">
-      <div class="leadership-card reveal">
-        <div class="leadership-role">Délégué Général de Promo</div>
-        <div class="leadership-org">École Polytechnique de Lomé (EPL/UL)</div>
-        <div class="leadership-period">Octobre 2023 – Avril 2026</div>
-        <div class="badge-list">
-          <span class="badge">Représentation & Médiation</span>
-          <span class="badge">Leadership Académique</span>
-          <span class="badge">Engagement Associatif</span>
-        </div>
-      </div>
-      <div class="leadership-card reveal" style="transition-delay:0.1s">
-        <div class="leadership-role">Major Général & Responsable d'organisation</div>
-        <div class="leadership-org">Lycée de Davié</div>
-        <div class="leadership-period">2020 – 2023</div>
-        <div class="badge-list">
-          <span class="badge">Excellence académique</span>
-          <span class="badge">Organisation événementielle</span>
-          <span class="badge">Gestion financière</span>
-        </div>
+    <div class="leadership-card reveal" style="transition-delay:0.1s">
+      <div class="leadership-role">Major Général &amp; Responsable d'organisation</div>
+      <div class="leadership-org">Lycée de Davié</div>
+      <div class="leadership-period">2020 – 2023</div>
+      <div class="badge-list">
+        <span class="badge">Excellence académique</span>
+        <span class="badge">Organisation événementielle</span>
+        <span class="badge">Gestion financière</span>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- INTERETS -->
-  <section id="interets">
-    <p class="section-label reveal">Centres d'intérêt</p>
-    <h2 class="section-title reveal">Au-delà<br/>du travail</h2>
-    <div class="interest-row reveal">
-      <div class="interest-item">
-        <span class="emoji">⚽</span>
-        Sport
-      </div>
-      <div class="interest-item">
-        <span class="emoji">📚</span>
-        Lecture
-      </div>
-      <div class="interest-item">
-        <span class="emoji">🎬</span>
-        Cinéma
-      </div>
-    </div>
-  </section>
+<!-- INTERETS -->
+<section id="interets">
+  <p class="section-label reveal">Centres d'intérêt</p>
+  <h2 class="section-title reveal">Au-delà<br/>du travail</h2>
+  <div class="interest-row reveal">
+    <div class="interest-item"><span class="emoji">⚽</span>Sport</div>
+    <div class="interest-item"><span class="emoji">📖</span>Culture Générale</div>
+    <div class="interest-item"><span class="emoji">🎬</span>Cinéma</div>
+  </div>
+</section>
 
-  <!-- FOOTER -->
-  <footer>
-    <div>
-      <div class="footer-name">Victorien Yawo Attila</div>
-      <p>Supply Chain · Génie Industriel · Lomé, Togo</p>
-    </div>
-    <div style="text-align:right">
-      <p style="margin-bottom:0.3rem">
-        <a href="mailto:victorienattila@gmail.com" style="color:#e8c97e; text-decoration:none">victorienattila@gmail.com</a>
-      </p>
-      <p><a href="https://www.linkedin.com/in/victorienattila" target="_blank" style="color:#4fc3f7; text-decoration:none">LinkedIn →</a></p>
-    </div>
-  </footer>
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-name">Victorien Yawo Attila</div>
+    <p>Étudiant Ingénieur · Grenoble INP Génie Industriel</p>
+  </div>
+  <div style="text-align:right">
+    <p style="margin-bottom:0.3rem">
+      <a href="mailto:victorienattila@gmail.com" style="color:var(--accent); text-decoration:none">victorienattila@gmail.com</a>
+    </p>
+    <p><a href="https://www.linkedin.com/in/victorienattila" target="_blank" style="color:var(--accent2); text-decoration:none">LinkedIn →</a></p>
+  </div>
+</footer>
 
-  <script>
-    // Scroll reveal
-    const reveals = document.querySelectorAll('.reveal');
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          obs.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    reveals.forEach(el => obs.observe(el));
-
-    // Animate lang bars on visibility
-    const bars = document.querySelectorAll('.lang-fill');
-    const barObs = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.style.width = e.target.style.width;
-          barObs.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.5 });
-    bars.forEach(b => {
-      const w = b.style.width;
-      b.style.width = '0%';
-      setTimeout(() => b.style.width = w, 200);
-      barObs.observe(b);
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
     });
-  </script>
+  }, { threshold: 0.1 });
+  reveals.forEach(el => obs.observe(el));
 
+  // Lang bars — animate on scroll
+  const bars = document.querySelectorAll('.lang-fill');
+  bars.forEach(b => { b.style.width = '0%'; });
+  const barObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const target = e.target.getAttribute('data-width');
+        setTimeout(() => { e.target.style.width = target; }, 300);
+        barObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  bars.forEach(b => barObs.observe(b));
+</script>
 </body>
 </html>
